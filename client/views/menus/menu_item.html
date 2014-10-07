@@ -1,3 +1,6 @@
 <template name="menuItem">
-	<li>{{name}} - {{price}}</li>
+	<li>
+	<p>{{name}} - {{price}}</p>
+	<p><a href="{{pathFor 'menuPage'}}" class="btn btn-info">View details</a></p>
+	</li>
 </template>
