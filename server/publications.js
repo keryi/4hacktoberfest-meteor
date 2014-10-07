@@ -6,6 +6,6 @@ Meteor.publish('orders', function() {
 	return Orders.find();
 });
 
-Meteor.publish('orderlists', function() {
-	return OrderLists.find();
+Meteor.publish('orders_lists', function() {
+	return OrdersLists.find();
 });
