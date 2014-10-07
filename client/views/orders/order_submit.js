@@ -21,4 +21,4 @@ Template.orderSubmit.events({
 
 		Router.go('orderLists', { _id: order.orderListId });
 	}
-})
+});
