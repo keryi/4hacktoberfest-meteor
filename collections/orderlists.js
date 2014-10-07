@@ -1,0 +1,1 @@
+OrderLists = new Meteor.Collection('order_lists');
