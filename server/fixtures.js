@@ -1,14 +1,26 @@
 if (Menus.find().count() == 0) {
-	Menus.insert({
+	var crId = Menus.insert({
 		name: 'Chicken Rice',
 		price: 5.50,
 	});
-	Menus.insert({
+	
+	var wmId = Menus.insert({
 		name: 'Wantoon Mee',
 		price: 4.50,
 	});
-	Menus.insert({
+
+	var fmId = Menus.insert({
 		name: 'Fried Meehoon',
 		price: 3.50,
+	});
+
+	Orders.insert({
+		menuId: wmId,
+		quantity: 2
+	});
+
+	Orders.insert({
+		menuId: crId,
+		quantity: 1
 	});
 }

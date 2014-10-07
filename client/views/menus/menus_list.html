@@ -1,7 +1,21 @@
 <template name="menusList">
+<h1>Menus</h1>
 <ol>
-{{#each menus}}
-{{> menuItem}}
+	{{#each menus}}
+		<li>
+		{{> menuItem}}
+		<a href="{{pathFor 'menuPage'}}" class="btn btn-info">View details</a>
+		<a href="{{pathFor 'orderSubmit'}}" class="btn btn-primary">Order</a>
+		</li>
+	{{/each}}
+</ol>
+
+<h1>Orders</h1>
+<ol>
+{{#each orders}}
+	<li>
+	{{> orderItem}}
+	</li>
 {{/each}}
 </ol>
 </template>
