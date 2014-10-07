@@ -24,18 +24,21 @@ if (Menus.find().count() == 0) {
 	Orders.insert({
 		menuId: wmId,
 		orderListId: orderListOneId,
-		quantity: 2
+		quantity: 2,
+		submitted: now - 3 * 3600 * 1000
 	});
 
 	Orders.insert({
 		menuId: crId,
 		orderListId: orderListOneId,
-		quantity: 1
+		quantity: 1,
+		submitted: now - 3 * 3600 * 1000
 	});
 
 	Orders.insert({
 		menuId: fmId,
 		orderListId: orderListOneId,
-		quantity: 5
+		quantity: 5,
+		submitted: now - 3 * 3600 * 1000
 	});
 }

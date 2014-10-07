@@ -18,4 +18,28 @@ suite('Orders', function() {
 			done();
 		});
 	});
+
+	test('using both server and client', function(done, server, client) {
+		server.eval(function() {
+			Orders.find().observe({
+				added: addedNewOrder
+			});
+
+			function addedNewOrder(order) {
+				emit('order', order);
+			}
+		}).once('order', function(order) {
+			// First order in fixtures, not the one created by client below
+			assert.equal(order.quantity, 2);
+			done();
+		});
+
+		client.eval(function() {
+			Orders.insert({
+				menuId: 1,
+				orderListId: 1,
+				quantity: 3
+			});
+		});
+	});
 });
