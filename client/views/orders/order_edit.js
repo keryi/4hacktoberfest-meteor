@@ -6,9 +6,13 @@ Template.orderEdit.events({
 			quantity: parseInt($(e.target).find('[name=order_quantity]').val())
 		}
 
-		Orders.update({ _id: this._id }, { $set: orderProperties });
-
-		Router.go('orderLists', { _id: this.orderListId });
+		if (orderProperties.quantity <= 0) {
+			var error = new Meteor.Error(422, 'Please specify a valid quantity');
+			throwError(error.reason);
+		} else {
+			Orders.update({ _id: this._id }, { $set: orderProperties });
+			Router.go('orderLists', { _id: this.orderListId });
+		}
 	}
 });
 

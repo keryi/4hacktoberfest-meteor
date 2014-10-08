@@ -125,7 +125,7 @@ suite('Orders', function() {
 		});
 	});
 
-	test('Invalid order quantity throw error', function(done, server, client) {
+	test('Add order with invalid quantity throw error', function(done, server) {
 		server.eval(function() {
 			var orderAttributes = {
 					menuId: 1,
