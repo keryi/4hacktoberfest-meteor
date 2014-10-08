@@ -10,17 +10,12 @@ Template.orderSubmit.events({
 			submitted: Date.now()
 		}
 
-		var existing_order = Orders.findOne({
-			menuId: order.menuId,
-			orderListId: order.orderListId
+		Meteor.call('order', order, function(error, id) {
+			if (error) {
+				throwError(error.reason);
+			} else {
+				Router.go('orderLists', { _id: order.orderListId });
+			}
 		});
-
-		if (existing_order != null) {
-			Orders.update({ _id: existing_order._id }, { $inc: { quantity: order.quantity } });
-		} else {
-			order._id = Orders.insert(order);
-		}
-
-		Router.go('orderLists', { _id: order.orderListId });
 	}
 });

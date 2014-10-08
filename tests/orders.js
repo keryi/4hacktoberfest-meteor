@@ -124,4 +124,24 @@ suite('Orders', function() {
 			done();
 		});
 	});
+
+	test('Invalid order quantity throw error', function(done, server, client) {
+		server.eval(function() {
+			var orderAttributes = {
+					menuId: 1,
+					orderListId: 1,
+					quantity: 0,
+					status: 'processing'
+			};
+
+			Meteor.call('order', orderAttributes, function(error, id) {
+				var ret = { error: error, id: id };
+				emit('return', ret);
+			});
+
+		}).once('return', function(ret) {
+			assert.ok(ret.error.reason.match(/Please specify a valid quantity/));
+			done();
+		});
+	});
 });
