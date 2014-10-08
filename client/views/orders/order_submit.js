@@ -5,7 +5,9 @@ Template.orderSubmit.events({
 		var order = {
 			menuId: $(e.target).find('[name=menu_id]').val(),
 			orderListId: Session.get('orderlist_id'),
-			quantity: parseInt($(e.target).find('[name=order_quantity]').val())
+			quantity: parseInt($(e.target).find('[name=order_quantity]').val()),
+			status: 'processing',
+			submitted: Date.now()
 		}
 
 		var existing_order = Orders.findOne({

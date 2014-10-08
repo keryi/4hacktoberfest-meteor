@@ -18,27 +18,30 @@ if (Menus.find().count() == 0) {
 
 	var orderListOneId = OrderLists.insert({
 		paid: false,
-		submitted: now - 3 * 3600 * 1000
+		submitted: now - 3 * 3600 * 1000,
 	});
 
 	Orders.insert({
 		menuId: wmId,
 		orderListId: orderListOneId,
 		quantity: 2,
-		submitted: now - 3 * 3600 * 1000
+		submitted: now - 3 * 3600 * 1000,
+		status: 'processing'
 	});
 
 	Orders.insert({
 		menuId: crId,
 		orderListId: orderListOneId,
 		quantity: 1,
-		submitted: now - 3 * 3600 * 1000
+		submitted: now - 3 * 3600 * 1000,
+		status: 'cooking'
 	});
 
 	Orders.insert({
 		menuId: fmId,
 		orderListId: orderListOneId,
 		quantity: 5,
-		submitted: now - 3 * 3600 * 1000
+		submitted: now - 3 * 3600 * 1000,
+		status: 'served'
 	});
 }

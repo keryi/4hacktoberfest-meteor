@@ -6,7 +6,8 @@ suite('Orders', function() {
 			Orders.insert({
 				menuId: 1,
 				orderListId: 1,
-				quantity: 1
+				quantity: 1,
+				status: 'processing'
 			});
 			var orders = Orders.find().fetch();
 			emit('orders', orders);
@@ -22,10 +23,10 @@ suite('Orders', function() {
 	test('using both server and client', function(done, server, client) {
 		server.eval(function() {
 			Orders.find().observe({
-				added: addedNewOrder
+				added: onAdded
 			});
 
-			function addedNewOrder(order) {
+			function onAdded(order) {
 				emit('order', order);
 			}
 		}).once('order', function(order) {
@@ -38,8 +39,89 @@ suite('Orders', function() {
 			Orders.insert({
 				menuId: 1,
 				orderListId: 1,
-				quantity: 3
+				quantity: 3,
+				status: 'processing'
 			});
+		});
+	});
+
+	test('Allow to update order if its status is processing', function(done, server, client) {
+		server.eval(function() {
+			Orders.find().observe({
+				changed: onChanged,
+				onAdded: onAdded
+			});
+
+			function onChanged(newOrder, oldOrder) {
+				emit('change', newOrder, oldOrder);
+			}
+
+			function onAdded(order) {
+				emit('add', order);
+			}
+			 emit('return');
+		});
+
+		server.once('change', function(newOrder, oldOrder) {
+			assert.equal(newOrder.quantity, 5);
+			done();
+		});
+
+		server.once('add', function(order) {
+			Orders.update({ _id: order.id }, { $set: { quantity: 5 } });
+			done();
+		});
+
+		server.once('return', function() {
+			client.eval(function() {
+				Orders.insert({
+					menuId: 1,
+					orderListId: 2,
+					quantity: 3,
+					status: 'processing'
+				});
+			});
+			done();
+		});
+	});
+
+	test('Deny to update order if its status is not processing', function(done, server, client) {
+		server.eval(function() {
+			Orders.find().observe({
+				changed: onChanged,
+				onAdded: onAdded
+			});
+
+			function onChanged(newOrder, oldOrder) {
+				emit('change', newOrder, oldOrder);
+			}
+
+			function onAdded(order) {
+				emit('add', order);
+			}
+			 emit('return');
+		});
+
+		server.once('change', function(newOrder, oldOrder) {
+			assert.equal(newOrder.quantity, 3);
+			done();
+		});
+
+		server.once('add', function(order) {
+			Orders.update({ _id: order.id }, { $set: { quantity: 5 } });
+			done();
+		});
+
+		server.once('return', function() {
+			client.eval(function() {
+				Orders.insert({
+					menuId: 1,
+					orderListId: 2,
+					quantity: 3,
+					status: 'cooking'
+				});
+			});
+			done();
 		});
 	});
 });
