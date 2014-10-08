@@ -3,5 +3,8 @@
 <p>unit price: {{menuItem.price}}</p>
 <p>quantity: {{quantity}}</p>
 <p>subtotal: {{subtotal}}</p>
+<p>status: {{status}}</p>
+{{#if editable}}
 <p><a href="{{pathFor 'orderEdit'}}" class="btn btn-warning">Edit</a></p>
+{{/if}}
 </template>

@@ -10,5 +10,9 @@ Template.orderItem.helpers({
 		} else {
 			return 0.0;
 		}
+	},
+
+	editable: function() {
+		return this.status == 'processing';
 	}
 });
