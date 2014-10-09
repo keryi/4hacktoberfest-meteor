@@ -10,8 +10,13 @@ Template.orderEdit.events({
 			var error = new Meteor.Error(422, 'Please specify a valid quantity');
 			throwError(error.reason);
 		} else {
-			Orders.update({ _id: this._id }, { $set: orderProperties });
-			Router.go('orderLists', { _id: this.orderListId });
+			Orders.update({ _id: this._id }, { $set: orderProperties }, function(error) {
+				if (error) {
+					throwError(error.reason);
+				} else {
+					Router.go('orderLists', { _id: this.orderListId });
+				}
+			});
 		}
 	}
 });

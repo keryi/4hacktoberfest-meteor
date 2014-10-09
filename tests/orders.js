@@ -49,7 +49,7 @@ suite('Orders', function() {
 		server.eval(function() {
 			Orders.find().observe({
 				changed: onChanged,
-				onAdded: onAdded
+				added: onAdded
 			});
 
 			function onChanged(newOrder, oldOrder) {
@@ -59,29 +59,19 @@ suite('Orders', function() {
 			function onAdded(order) {
 				emit('add', order);
 			}
-			 emit('return');
+
+			emit('return');
 		});
 
 		server.once('change', function(newOrder, oldOrder) {
-			assert.equal(newOrder.quantity, 5);
+			assert.equal(newOrder.quantity, 10);
 			done();
 		});
 
 		server.once('add', function(order) {
-			Orders.update({ _id: order.id }, { $set: { quantity: 5 } });
-			done();
-		});
-
-		server.once('return', function() {
-			client.eval(function() {
-				Orders.insert({
-					menuId: 1,
-					orderListId: 2,
-					quantity: 3,
-					status: 'processing'
-				});
-			});
-			done();
+			server.eval(function(order) {
+				Orders.update({ _id: order._id }, { $set: { quantity: 10 } });
+			}, order);
 		});
 	});
 
@@ -89,7 +79,7 @@ suite('Orders', function() {
 		server.eval(function() {
 			Orders.find().observe({
 				changed: onChanged,
-				onAdded: onAdded
+				added: onAdded
 			});
 
 			function onChanged(newOrder, oldOrder) {
@@ -99,29 +89,19 @@ suite('Orders', function() {
 			function onAdded(order) {
 				emit('add', order);
 			}
-			 emit('return');
+
+			emit('return');
 		});
 
 		server.once('change', function(newOrder, oldOrder) {
-			assert.equal(newOrder.quantity, 3);
+			assert.equal(oldOrder.quantity, 2);
 			done();
 		});
 
 		server.once('add', function(order) {
-			Orders.update({ _id: order.id }, { $set: { quantity: 5 } });
-			done();
-		});
-
-		server.once('return', function() {
-			client.eval(function() {
-				Orders.insert({
-					menuId: 1,
-					orderListId: 2,
-					quantity: 3,
-					status: 'cooking'
-				});
-			});
-			done();
+			server.eval(function(order) {
+				Orders.update({ _id: order._id }, { $set: { quantity: 5 } });
+			}, order);
 		});
 	});
 
@@ -142,6 +122,35 @@ suite('Orders', function() {
 		}).once('return', function(ret) {
 			assert.ok(ret.error.reason.match(/Please specify a valid quantity/));
 			done();
+		});
+	});
+
+	test('Update order with invalid quantity throw error', function(done, server, client) {
+		server.eval(function() {
+			Orders.find().observe({
+				changed: onChanged,
+				added: onAdded
+			});
+
+			function onChanged(newOrder, oldOrder) {
+				emit('change', newOrder, oldOrder);
+			}
+
+			function onAdded(order) {
+				emit('add', order);
+			}
+			emit('return');
+		});
+
+		server.once('change', function(newOrder, oldOrder) {
+			assert.equal(oldOrder.quantity, 2);
+			done();
+		});
+
+		server.once('add', function(order) {
+			server.eval(function(order) {
+				Orders.update({ _id: order._id }, { $set: { quantity: 0 } });
+			}, order);
 		});
 	});
 });

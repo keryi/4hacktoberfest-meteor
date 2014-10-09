@@ -1,12 +1,18 @@
 Orders = new Meteor.Collection('orders');
 
 Orders.allow({
-	update: function(userId, order, fieldNames) {
-		return order.status == 'processing';
-	},
-
 	insert: function(userId, order) {
 		return true;
+	},
+
+	update: function(userId, order, fieldNames, modifier) {
+		return (order.status == 'processing' && order.quantity > 0);
+	}
+});
+
+Orders.deny({
+	update: function(userId, order, fieldNames, modifier) {
+		return (order.status != 'processing' || order.quantity <= 0);
 	}
 });
 
@@ -21,14 +27,16 @@ Meteor.methods({
 			orderListId: orderAttributes.orderListId
 		});
 
-		if (existing_order != null) {
+		if (existing_order) {
 			Orders.update(
 				{ _id: existing_order._id },
-				{ $inc: { quantity: orderAttributes.quantity } });
+				{ $inc: { quantity: orderAttributes.quantity } }, function(error) {
+					throw error;
+				});
 		} else {
 			orderAttributes._id = Orders.insert(orderAttributes);
 		}
 
 		return orderAttributes._id;
 	}
-})
+});
