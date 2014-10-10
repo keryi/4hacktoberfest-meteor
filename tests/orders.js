@@ -153,4 +153,29 @@ suite('Orders', function() {
 			}, order);
 		});
 	});
+
+	test('Allow to remove order under processing', function(done, server) {
+		server.eval(function() {
+			var order = Orders.findOne();
+			Orders.remove(order._id);
+			emit('remove', order);
+		}).once('remove', function(orderId) {
+			server.eval(function(orderId) {
+				var order = Orders.findOne({ _id: orderId });
+				emit('check', order);
+			}, orderId).once('check', function(order) {
+				assert.equal(order, null);
+				done();
+			});
+		});
+	});
+
+	test('Deny to remove order after processing', function(done, server) {
+		server.eval(function() {
+			emit('done');
+		}).once('done', function() {
+			assert.equal(1, 2);
+			done();
+		});
+	});
 });

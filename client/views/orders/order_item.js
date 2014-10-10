@@ -24,7 +24,11 @@ Template.orderItem.events({
 		if (confirm('Cancel this order?')) {
 			var currentOrderId = this._id;
 			var currentOrderListId = this.orderListId;
-			Orders.remove(currentOrderId);
+			Orders.remove(currentOrderId, function(error) {
+				if (error) {
+					throwError(error.reason);
+				}
+			});
 			Router.go('orderLists', { _id: currentOrderListId });
 		}
 	}
