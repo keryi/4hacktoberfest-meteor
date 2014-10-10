@@ -8,8 +8,8 @@ Template.orderListSubmit.events({
 			submitted: now - 3 * 3600 * 1000
 		}
 
-		orderListId = OrderLists.insert(orderList);
-		Session.set('orderlist_id', orderListId);
+		var orderListId = OrderLists.insert(orderList);
+		amplify.store('hacktoberfest.orderlist_id', orderListId);
 		Router.go('orderLists', { _id: orderListId });
 	}
 })

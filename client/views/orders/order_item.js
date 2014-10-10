@@ -16,3 +16,16 @@ Template.orderItem.helpers({
 		return this.status == 'processing';
 	}
 });
+
+Template.orderItem.events({
+	'click .delete': function(e) {
+		e.preventDefault();
+
+		if (confirm('Cancel this order?')) {
+			var currentOrderId = this._id;
+			var currentOrderListId = this.orderListId;
+			Orders.remove(currentOrderId);
+			Router.go('orderLists', { _id: currentOrderListId });
+		}
+	}
+});

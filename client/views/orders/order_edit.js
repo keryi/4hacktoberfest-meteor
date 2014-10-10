@@ -6,15 +6,18 @@ Template.orderEdit.events({
 			quantity: parseInt($(e.target).find('[name=order_quantity]').val())
 		}
 
+		var currentOrderId = this._id;
+		var currentOrderListId = this.orderListId;
+
 		if (orderProperties.quantity <= 0) {
 			var error = new Meteor.Error(422, 'Please specify a valid quantity');
 			throwError(error.reason);
 		} else {
-			Orders.update({ _id: this._id }, { $set: orderProperties }, function(error) {
+			Orders.update({ _id: currentOrderId }, { $set: orderProperties }, function(error) {
 				if (error) {
 					throwError(error.reason);
 				} else {
-					Router.go('orderLists', { _id: this.orderListId });
+					Router.go('orderLists', { _id: currentOrderListId });
 				}
 			});
 		}

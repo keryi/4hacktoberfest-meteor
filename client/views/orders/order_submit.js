@@ -4,7 +4,7 @@ Template.orderSubmit.events({
 
 		var order = {
 			menuId: $(e.target).find('[name=menu_id]').val(),
-			orderListId: Session.get('orderlist_id'),
+			orderListId: amplify.store('hacktoberfest.orderlist_id'),
 			quantity: parseInt($(e.target).find('[name=order_quantity]').val()),
 			status: 'processing',
 			submitted: Date.now()

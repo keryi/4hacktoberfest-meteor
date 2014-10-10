@@ -2,17 +2,15 @@ Orders = new Meteor.Collection('orders');
 
 Orders.allow({
 	insert: function(userId, order) {
-		return true;
+		return order.quantity > 0;
 	},
 
 	update: function(userId, order, fieldNames, modifier) {
 		return (order.status == 'processing' && order.quantity > 0);
-	}
-});
+	},
 
-Orders.deny({
-	update: function(userId, order, fieldNames, modifier) {
-		return (order.status != 'processing' || order.quantity <= 0);
+	remove: function(userId, order) {
+		return order.status == 'processing';
 	}
 });
 
