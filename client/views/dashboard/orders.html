@@ -12,9 +12,9 @@
 	<tbody>
 		<tr>
 		<td>{{menuName this.menuId}}</td>
-		<td><a href="#" id="cook" class="btn btn-primary">Cook</a></td>
+		<td><a href="#" id="cook" class="btn btn-primary {{disable this._id 'cook'}}">Cook</a></td>
 		<td><a href="#" id="reject" class="btn btn-danger">Reject</a></td>
-		<td><a href="#" id="serve" class="btn btn-success">Serve</a></td>
+		<td><a href="#" id="serve" class="btn btn-success {{disable this._id 'serve'}}">Serve</a></td>
 		</tr>
 	</tbody>
 	</table>

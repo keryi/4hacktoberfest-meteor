@@ -6,7 +6,8 @@ Orders.allow({
 	},
 
 	update: function(userId, order, fieldNames, modifier) {
-		return (order.status == 'processing' && order.quantity > 0);
+		return ((order.status == 'processing' || order.status == 'cooking')
+			&& order.quantity > 0);
 	},
 
 	remove: function(userId, order) {
