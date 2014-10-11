@@ -4,9 +4,7 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 iron:router
 mizzao:bootstrap-3
 amplify
 mrt:iron-router-progress
-

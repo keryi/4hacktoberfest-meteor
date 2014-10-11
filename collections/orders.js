@@ -30,7 +30,7 @@ Meteor.methods({
 				{ _id: existing_order._id },
 				{ $inc: { quantity: orderAttributes.quantity } }, function(error) {
 					throw error;
-				});
+			});
 		} else {
 			orderAttributes._id = Orders.insert(orderAttributes);
 		}
