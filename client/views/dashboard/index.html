@@ -1,0 +1,14 @@
+<template name="dashboardIndex">
+	{{#if currentUser}}
+		{{#unless loggingIn}}
+			<a href="#" id="signout" class="btn btn-danger">Sign out</a>
+			<h2>Orders</h2>
+		{{/unless}}
+	{{else}}
+		{{#unless loggingIn}}
+			<h1 class="text-center">Welcome to 4hacktoberfest dashboard!</h1>
+			{{> accountForms}}
+		{{/unless}}
+	{{/if}}
+	
+</template>

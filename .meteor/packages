@@ -8,3 +8,6 @@ iron:router
 mizzao:bootstrap-3
 amplify
 mrt:iron-router-progress
+accounts-password
+accounts-base
+

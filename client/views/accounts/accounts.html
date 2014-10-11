@@ -1,0 +1,67 @@
+<template name="accountForms">
+{{#if signinFormView}}
+	{{> signinForm}}
+{{/if}}
+{{#if signupFormView}}
+	{{> signupForm}}
+{{/if}}
+</template>
+
+<template name="signinForm">
+	<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+	<h2>Sign in</h2>
+	<form id="signinForm">
+		<div class="form-group">
+			<label class="control-label">Username</label>
+			<input type="text" id="signinUsername" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Password</label>
+			<input type="password" id="signinPassword" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<input type="submit" id="signinButton" value="Sign in" class="btn btn-primary" />
+		</div>
+	</form>
+
+	<h2>No Account Yet?</h2>
+	<a href="#" id="signup" class="btn btn-success">Sign up</a>
+	</div>
+	</div>
+</template>
+
+
+<template name="signupForm">
+	<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+    <h2>Sign up</h2>
+
+    <form id="signupForm">
+		<div class="form-group">
+			<label class="control-label">Username</label>
+			<input type="text" id="signupUsername" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Password</label>
+			<input type="password" id="signupPassword" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<label class="control-label">Password Confirmation</label>
+			<input type="password" id="signupPasswordConfirmation" class="form-control" />
+		</div>
+
+		<div class="form-group">
+			<input type="submit" id="signupButton" value="Sign up" class="btn btn-success" />
+		</div>
+	</form>
+
+	<h2>Already have an account?</h2>
+	<a href="#" id="signin" class="btn btn-primary">Sign in</a>
+    </div>
+	</div>
+</template>
