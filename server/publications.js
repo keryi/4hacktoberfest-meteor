@@ -13,3 +13,7 @@ Meteor.publish('orders', function(orderListId) {
 Meteor.publish('orderList', function(id) {
 	return OrderLists.find(id);
 });
+
+Meteor.publish('allOrders', function() {
+	return Orders.find();
+});

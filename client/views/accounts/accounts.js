@@ -23,6 +23,8 @@ Template.signinForm.events({
 	'submit #signinForm': function(e, t) {
 		e.preventDefault();
 
+		clearError();
+		
 		var username = t.find('#signinUsername').value
 		var password = t.find('#signinPassword').value
 

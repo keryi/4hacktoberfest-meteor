@@ -1,0 +1,22 @@
+<template name="dashboardOrders">
+<h2>Orders</h2>
+
+{{#each orders}}
+	<table class="table">
+	<thead>
+		<th>Name</th>
+		<th width="10%"></th>
+		<th width="10%"></th>
+		<th width="10%"></th>
+	</thead>
+	<tbody>
+		<tr>
+		<td>{{menuName this.menuId}}</td>
+		<td><a href="#" id="cook" class="btn btn-primary">Cook</a></td>
+		<td><a href="#" id="reject" class="btn btn-danger">Reject</a></td>
+		<td><a href="#" id="serve" class="btn btn-success">Serve</a></td>
+		</tr>
+	</tbody>
+	</table>
+{{/each}}
+</template>
