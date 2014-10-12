@@ -1,8 +1,24 @@
 <template name="layout">
+	{{> header}}
 	<div class="container">
 		{{> errors}}
 		<div id="main">
 			{{> yield}}
 		</div>
 	</div>
+</template>
+
+<template name="header">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<a class="navbar-brand" href="#">4Hacktoberfest</a>
+			<ul class="nav navbar-nav">
+				{{#unless currentUser}}
+					<li class="dropdown">
+						{{> notifications}}
+					</li>
+				{{/unless}}
+			</ul>
+		</div>
+	</nav>
 </template>

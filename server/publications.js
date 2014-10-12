@@ -17,3 +17,7 @@ Meteor.publish('orderList', function(id) {
 Meteor.publish('allOrders', function() {
 	return Orders.find();
 });
+
+Meteor.publish('notifications', function(orderListId) {
+	return Notifications.find({ orderListId: orderListId });
+})

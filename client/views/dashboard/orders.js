@@ -28,6 +28,7 @@ Template.dashboardOrders.events({
 	'click #cook': function(e) {
 		e.preventDefault();
 		Orders.update(this._id, { $set: { status: 'cooking' } });
+		createOrderNotification(this, 'cooking');
 	},
 
 	'click #reject': function(e) {
@@ -35,6 +36,7 @@ Template.dashboardOrders.events({
 
 		if (confirm('Reject this order?')) {
 			Orders.update(this._id, { $set: { status: 'reject' } });
+			createOrderNotification(this, 'reject');
 		}
 	},
 
@@ -42,5 +44,6 @@ Template.dashboardOrders.events({
 		e.preventDefault();
 
 		Orders.update(this._id, { $set: { status: 'served' } });
+		createOrderNotification(this, 'served');
 	}
 });
