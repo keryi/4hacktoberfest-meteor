@@ -1,5 +1,13 @@
 <template name="landingIndex">
-	<h1>Welcome to Hacktoberfest, We drink, We Hack!</h1>
-	<h2><a href="{{pathFor 'menusList'}}">Checkout our menus!</a></h2>
-	{{> orderListSubmit}}
+	<div id="bg">
+		<img src="images/beer-bg.jpg" alt="">
+	</div>
+
+	<div id="landing-banner">
+		<h1 class="text-center">Welcome to <b>Hacktoberfest</b>, We <b>drink</b>, We <b>Hack</b>!</h1>
+		<div class="text-center">
+			<a href="{{pathFor 'menusList'}}" class="btn btn-large btn-default">Checkout our menus!</a>
+		{{> orderListSubmit}}
+		</div>
+	</div>
 </template>
