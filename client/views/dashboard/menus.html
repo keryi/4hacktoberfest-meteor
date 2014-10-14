@@ -1,0 +1,20 @@
+<template name="dashboardMenus">
+<h2>Menus</h2>
+
+{{#each menus}}
+	<table class="table">
+	<thead>
+		<th>Name</th>
+		<th width="10%"></th>
+		<th width="10%"></th>
+	</thead>
+	<tbody>
+		<tr>
+		<td>{{name}}</td>
+		<td><a href="#" class="btn btn-warning">Edit</a></td>
+		<td><a href="#" class="btn btn-danger">Delete</a></td>
+		</tr>
+	</tbody>
+	</table>
+{{/each}}
+</template>
