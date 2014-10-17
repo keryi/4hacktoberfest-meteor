@@ -8,8 +8,9 @@ Template.dashboardOrders.helpers({
 	},
 
 	disable: function(orderId, btnClass) {
-		if (Orders.findOne(orderId).status == 'cooking') {
-			if (btnClass == 'cook') {
+		var status = Orders.findOne(orderId).status;
+		if (status == 'cooking') {
+			if (btnClass == 'cook' || btnClass == 'reject') {
 				return 'disabled';
 			}
 
