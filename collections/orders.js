@@ -23,7 +23,8 @@ Meteor.methods({
 
 		var existing_order = Orders.findOne({
 			menuId: orderAttributes.menuId,
-			orderListId: orderAttributes.orderListId
+			orderListId: orderAttributes.orderListId,
+			status: 'processing'
 		});
 
 		if (existing_order) {
