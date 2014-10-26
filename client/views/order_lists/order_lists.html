@@ -1,4 +1,4 @@
-<template name="orderLists">
+<template name='orderLists'>
 {{> menusList}}
 
 <h2>Orders</h2>
@@ -23,12 +23,61 @@
 <td>{{subtotal}}</td>
 <td>{{status}}</td>
 {{#if editable}}
-<td><a href="{{pathFor 'orderEdit'}}" class="btn btn-warning">Edit</a></td>
-<td><a href="#" class="btn btn-danger delete">Cancel</a></td>
+<td><a href='#' class='btn btn-warning edit-order' data-id='{{_id}}'>Edit</a></td>
+<td><a href='#' class='btn btn-danger delete-order'>Cancel</a></td>
 {{/if}}
 </tr>
 
 {{/each}}
 </tbody>
 </table>
+
+{{> editOrderForm}}
+</template>
+
+<template name='editOrderForm'>
+
+<div class='modal fade' id='edit-order-modal'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header'>
+				<button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>
+				<h4 class='modal-title'>Edit your order</h4>
+			</div>
+			<div class='modal-body'>
+			{{#with order}}
+			<form id='edit-order-form'>
+				{{#with menu}}
+				<table class='table table-bordered'>
+				<thead>
+				<tr>
+					<th>Name</th>
+					<th>Unit Price (RM)</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td>{{name}}</td>
+					<td>{{price}}</td>
+					</tr>
+				</tbody>
+				</table>
+				{{/with}}
+				<input type='hidden' id='edit_order_id' name='edit_order_id' value='{{_id}}' />
+				<input type='hidden' id='edit_menu_id' name='edit_menu_id' value='{{menuId}}' />
+				<div class='form-group'>
+					<label class='control-label'>Quantity</label>
+					<input class='form-control' type='number' id='edit_order_quantity' name='order_quantity' min='1' value='{{quantity}}' />
+				</div>
+			</form>
+			{{/with}}
+			</div>
+			<div class='modal-footer'>
+				<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+				<button type='button' class='btn btn-primary' id='edit-order-confirm-button'>Confirm</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 </template>
