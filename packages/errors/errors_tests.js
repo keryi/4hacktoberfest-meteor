@@ -6,3 +6,15 @@ Tinytest.add('Errors collection works', function(test) {
 
 	Errors.collection.remove({});
 });
+
+Tinytest.addAsync('Errors template works', function(test, done) {
+	Errors.throw('A new error!');
+	test.equal(Errors.collection.find().count(), 1);
+
+	UI.insert(UI.render(Template.meteorErrors), document.body);
+
+	Meteor.setTimeout(function() {
+		test.equal(Errors.collection.find({ seen: false }).count(), 0);
+		done();
+	}, 3500);
+});
