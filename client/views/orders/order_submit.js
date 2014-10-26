@@ -12,7 +12,7 @@ Template.orderSubmit.events({
 
 		Meteor.call('order', order, function(error, id) {
 			if (error) {
-				throwError(error.reason);
+				Errors.throw(error.reason);
 			} else {
 				Router.go('orderLists', { _id: order.orderListId });
 			}

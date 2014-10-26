@@ -11,11 +11,11 @@ Template.orderEdit.events({
 
 		if (orderProperties.quantity <= 0) {
 			var error = new Meteor.Error(422, 'Please specify a valid quantity');
-			throwError(error.reason);
+			Errors.throw(error.reason);
 		} else {
 			Orders.update({ _id: currentOrderId }, { $set: orderProperties }, function(error) {
 				if (error) {
-					throwError(error.reason);
+					Errors.throw(error.reason);
 				} else {
 					Router.go('orderLists', { _id: currentOrderListId });
 				}

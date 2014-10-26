@@ -1,6 +1,6 @@
 function checkUsername(username) {
 	if (username.length < 6) {
-		throwError("Username is too short, must be at least 6 characters");
+		Errors.throw("Username is too short, must be at least 6 characters");
 		return false;
 	}
 	return true;
@@ -8,12 +8,12 @@ function checkUsername(username) {
 
 function checkPassword(password, passwordConfirmation) {
 	if (password.length < 8) {
-		throwError("Password is too short, must be at least 8 characters");
+		Errors.throw("Password is too short, must be at least 8 characters");
 		return false;
 	}
 
 	if (passwordConfirmation != password) {
-		throwError("Password and password confirmation is not the same");
+		Errors.throw("Password and password confirmation is not the same");
 		return false;
 	}
 	return true;
@@ -30,7 +30,7 @@ Template.signinForm.events({
 
 		Meteor.loginWithPassword(username, password, function(error) {
 			if (error) {
-				throwError(error.reason);
+				Errors.throw(error.reason);
 			}
 		});
 	},
@@ -59,7 +59,7 @@ Template.signupForm.events({
 				password: password
 			}, function(error) {
 				if (error) {
-					throwError(error.reason);
+					Errors.throw(error.reason);
 				}
 			});
 		}

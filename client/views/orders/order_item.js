@@ -26,7 +26,7 @@ Template.orderItem.events({
 			var currentOrderListId = this.orderListId;
 			Orders.remove(currentOrderId, function(error) {
 				if (error) {
-					throwError(error.reason);
+					Errors.throw(error.reason);
 				}
 			});
 			Router.go('orderLists', { _id: currentOrderListId });
