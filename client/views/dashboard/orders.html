@@ -1,22 +1,23 @@
 <template name="dashboardOrders">
 <h2>Orders</h2>
-
+<table class="table table-bordered table-striped">
+<thead>
+<tr>
+	<th>Name</th>
+	<th width="10%"></th>
+	<th width="10%"></th>
+	<th width="10%"></th>
+</tr>
+</thead>
+<tbody>
 {{#each orders}}
-	<table class="table">
-	<thead>
-		<th>Name</th>
-		<th width="10%"></th>
-		<th width="10%"></th>
-		<th width="10%"></th>
-	</thead>
-	<tbody>
-		<tr>
-		<td>{{menuName this.menuId}}</td>
-		<td><a href="#" id="cook" class="btn btn-primary {{disable this._id 'cook'}}">Cook</a></td>
-		<td><a href="#" id="reject" class="btn btn-danger {{disable this._id 'reject'}}">Reject</a></td>
-		<td><a href="#" id="serve" class="btn btn-success {{disable this._id 'serve'}}">Serve</a></td>
-		</tr>
-	</tbody>
-	</table>
+<tr>
+	<td>{{menuName this.menuId}}</td>
+	<td><a href="#" id="cook" class="btn btn-primary {{disable this._id 'cook'}}">Cook</a></td>
+	<td><a href="#" id="reject" class="btn btn-danger {{disable this._id 'reject'}}">Reject</a></td>
+	<td><a href="#" id="serve" class="btn btn-success {{disable this._id 'serve'}}">Serve</a></td>
+</tr>
 {{/each}}
+</tbody>
+</table>
 </template>

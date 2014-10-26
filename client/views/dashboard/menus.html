@@ -1,20 +1,21 @@
 <template name="dashboardMenus">
 <h2>Menus - <a href="{{pathFor 'menuSubmit'}}" class="btn btn-primary">New</a></h2>
-
+<table class="table table-bordered table-striped">
+<thead>
+<tr>
+	<th>Name</th>
+	<th width="10%"></th>
+	<th width="10%"></th>
+</tr>
+</thead>
+<tbody>
 {{#each menus}}
-	<table class="table">
-	<thead>
-		<th>Name</th>
-		<th width="10%"></th>
-		<th width="10%"></th>
-	</thead>
-	<tbody>
-		<tr>
-		<td>{{name}}</td>
-		<td><a href="#" class="btn btn-warning">Edit</a></td>
-		<td><a href="#" class="btn btn-danger">Delete</a></td>
-		</tr>
-	</tbody>
-	</table>
+<tr>
+	<td>{{name}}</td>
+	<td><a href="#" class="btn btn-warning">Edit</a></td>
+	<td><a href="#" class="btn btn-danger">Delete</a></td>
+</tr>
 {{/each}}
+</tbody>
+</table>
 </template>

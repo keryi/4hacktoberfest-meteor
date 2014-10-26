@@ -1,12 +1,57 @@
-<template name="menusList">
-<h1>Menus</h1>
-<ol>
+<template name='menusList'>
+<h2>Menus</h2>
+<table class='table table-bordered table-striped'>
+<thead>
+<tr>
+<th>Name</th>
+<th>Price (RM)</th>
+<th width='10%'></th>
+</tr>
+</thead>
+<tbody>
 	{{#each menus}}
-		<li>
-		{{> menuItem}}
-		<a href="{{pathFor 'menuPage'}}" class="btn btn-info">View details</a>
-		<a href="{{pathFor 'orderSubmit'}}" class="btn btn-primary">Order</a>
-		</li>
+		<tr>
+		<td>{{name}}</td>
+		<td>{{price}}</td>
+		<td><a href='#' class='btn btn-primary order' data-id='{{_id}}'>Place Order</a></td>
+		</tr>
 	{{/each}}
-</ol>
+</tbody>
+</table>
+
+{{> submitOrderForm}}
+
+</template>
+
+<template name='submitOrderForm'>
+
+<div class='modal fade' id='submit-order-modal'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header'>
+				<button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>
+				<h4 class='modal-title'>Place your order</h4>
+			</div>
+			<div class='modal-body'>
+			<form id='submit-order-form'>
+				{{#with menu}}
+				<h4>{{name}}</h4>
+				
+				<input type='hidden' id='menu_id' name='menu_id' value='{{_id}}' />
+				<div class='form-group'>
+					<label class='control-label'>Quantity</label>
+					<input class='form-control' type='number' id='order_quantity' name='order_quantity' min='1' value='1' />
+				</div>
+				
+				{{/with}}
+			</form>
+			</div>
+			<div class='modal-footer'>
+				<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+				<button type='button' class='btn btn-primary' id='order-confirm-button'>Confirm</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 </template>
