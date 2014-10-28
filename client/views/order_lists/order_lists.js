@@ -16,6 +16,16 @@ Template.orderLists.helpers({
 		}
 	},
 
+	total: function() {
+		var orders = Orders.find({ orderListId: this._id }, { fields: { menuId: 1, quantity: 1 } }).fetch();
+		var total = 0.0;
+		orders.forEach(function(e) {
+		  var menu = Menus.findOne({ _id: e['menuId'] }, { fields: { price: 1 } });
+		  total += menu['price'] * e['quantity'];
+		});
+		return total;
+	},
+
 	editable: function() {
 		return this.status == 'processing';
 	},
