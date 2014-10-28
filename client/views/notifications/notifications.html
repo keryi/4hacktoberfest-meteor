@@ -1,22 +1,16 @@
 <template name="notifications">
-<a href="#" id="notification-toggle" class="dropdown-toggle" data-toggle="dropdown">
-	Notifications
-	{{#if notificationCount}}
-		<span class="badge badge-inverse">{{notificationCount}}</span>
-	{{/if}}
-	<b class="caret"></b>
-</a>
-<ul class="dropdown-menu" role="menu">
-	{{#if notificationCount}}
-		{{#each notifications}}
-			{{> notification}}
-		{{/each}}
-	{{else}}
-		<li><p>No notifications</p></li>
-	{{/if}}
-</ul>
+{{#if notificationCount}}
+	{{#each notifications}}
+		{{> notification}}
+	{{/each}}
+{{/if}}
 </template>
 
 <template name="notification">
-	<li><p>{{message}}</p></li>
+	<div class="alert alert-info alert-dismissible text-center" id='notif-alert' role="alert" data-id='{{this._id}}'>
+		<button type="button" class="close" data-dismiss="alert">
+		<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+		</button>
+		{{message}}
+	</div>
 </template>

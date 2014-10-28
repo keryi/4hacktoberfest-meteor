@@ -8,8 +8,10 @@ Template.notifications.helpers({
 	}
 });
 
-Template.notifications.events({
-	'click #notification-toggle': function() {
-		Notifications.update({ read: false }, { $set: { read: true } });
+Template.notification.events({
+	'close.bs.alert .alert': function(e) {
+		e.preventDefault();
+		var notifId = $(e.target).attr('data-id');
+		Notifications.update({ _id: notifId }, { $set: { read: true } });
 	}
-})
+});

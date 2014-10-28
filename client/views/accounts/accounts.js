@@ -22,8 +22,6 @@ function checkPassword(password, passwordConfirmation) {
 Template.signinForm.events({
 	'submit #signinForm': function(e, t) {
 		e.preventDefault();
-
-		clearError();
 		
 		var username = t.find('#signinUsername').value
 		var password = t.find('#signinPassword').value
@@ -43,8 +41,6 @@ Template.signinForm.events({
 Template.signupForm.events({
 	'submit #signupForm': function(e, t) {
 		e.preventDefault();
-
-		clearError();
 
 		var username = t.find('#signupUsername').value
 		var password = t.find('#signupPassword').value
