@@ -1,0 +1,21 @@
+<template name='dashboardHistory'>
+
+<h2>History of Orders</h2>
+<table class="table table-bordered table-striped">
+<thead>
+<tr>
+	<th>Name</th>
+	<th>Quantity</th>
+</tr>
+</thead>
+<tbody>
+{{#each orders}}
+<tr>
+	<td>{{menuName this.menuId}}</td>
+	<td>{{quantity}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+</template>
