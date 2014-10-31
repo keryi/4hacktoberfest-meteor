@@ -7,8 +7,7 @@ Template.menuSubmit.events({
 
 		Menus.insert({
 			name: menuName,
-			price: menuPrice,
-			submitted: Date.now()
+			price: menuPrice
 		});
 
 		Router.go('dashboardMenus');

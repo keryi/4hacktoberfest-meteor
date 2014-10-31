@@ -5,3 +5,7 @@ Menus.allow({
 		return Meteor.user() != null;
 	}
 });
+
+Menus.before.insert(function(userId, menu) {
+	menu.submitted = Date.now();
+});

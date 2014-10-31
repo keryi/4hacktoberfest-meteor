@@ -15,6 +15,10 @@ Orders.allow({
 	}
 });
 
+Orders.before.insert(function(userId, order) {
+	order.submitted = Date.now();
+});
+
 Meteor.methods({
 	order: function(orderAttributes) {
 		if (orderAttributes.quantity <= 0) {

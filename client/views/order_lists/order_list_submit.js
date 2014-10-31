@@ -3,8 +3,7 @@ Template.orderListSubmit.events({
 		e.preventDefault();
 
 		var orderList = {
-			paid: false,
-			submitted: Date.now()
+			paid: false
 		}
 
 		var orderListId = OrderLists.insert(orderList);

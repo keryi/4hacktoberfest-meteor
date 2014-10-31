@@ -5,3 +5,7 @@ OrderLists.allow({
 		return true;
 	}
 });
+
+OrderLists.before.insert(function(userId, orderList) {
+	orderList.submitted = Date.now();
+});

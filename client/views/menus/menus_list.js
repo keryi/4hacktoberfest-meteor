@@ -31,7 +31,6 @@ Template.submitOrderForm.events({
 			orderListId: amplify.store('hacktoberfest.orderlist_id'),
 			quantity: parseInt($('#order_quantity').val()),
 			status: 'processing',
-			submitted: Date.now()
 		}
 
 		Meteor.call('order', order, function(error, id) {

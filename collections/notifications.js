@@ -10,6 +10,10 @@ Notifications.allow({
 	}
 });
 
+Notifications.before.insert(function(userId, notif) {
+	notif.submitted = Date.now();
+});
+
 var createNotificationMessage = function(status) {
 	if (status == 'cooking') {
 		return 'Your order is being cooked now';
@@ -27,6 +31,5 @@ createOrderNotification = function(order, status) {
 		orderId: order._id,
 		message: createNotificationMessage(status),
 		read: false,
-		submitted: Date.now()
 	});
 }
